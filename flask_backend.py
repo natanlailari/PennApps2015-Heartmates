@@ -1,8 +1,9 @@
 # PennApps
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, render_template, request
 import csv
 import json
+import requests
 
 app = Flask(__name__)
 
@@ -15,34 +16,34 @@ def home():
 
 @app.route('/nutrition_facts', methods=['POST'])
 def schedule():
-    ''' A POST-only endpoint. Accept POST data of the form:
-    {'foods': [ list of foods ]}
-    format?
+    PM_Test_APIKey = 'ddc432d3-6900-44b0-84bf-58f3c16ef803'
+    FE_APIKey = 'n54k3jg9cpkwzvaam4vavc7c'
 
-    Suppose the list of courses is:
-    [{'dept': 'ACCT', 'code': '297', 'section': '402'},
-     {'dept': 'MATH', 'code': '104', 'section': '226'},
-     {'dept': 'CIS', 'code': '521', 'section': '001'}]
+    params = {'uid': 'user1', 'devid':'device1',
+               'appide': 'heartmates', 'f':'json',
+               'api_key': FE_APIKey}
+    # data = {'api_key': 'n54k3jg9cpkwzvaam4vavc7c'}
+    url_create = 'http://api.foodessentials.com/createsession'
+    # set up session
+    resp = requests.get(url_create, params=params)
+    sid = resp.json()['session_id']
 
-    Note that when sending this data, we need to JSON-encode it,
-    i.e. turn the list into a string that can be sent over HTTP:
-    req = requests.post(.., data={'courses': json.dumps(list_of_courses)})
+    # set profile
+    
 
-    Then req.json() should equal:
-    {
-        u'Monday':    [u'Taxes And Bus Strategy: 12-1:30PM'],
-        u'Tuesday':   [u'Fundamentals Of Ai: 10:30-12NOON'],
-        u'Wednesday': [u'Calculus I: 9-10AM',
-                       u'Taxes And Bus Strategy: 12-1:30PM']
-        u'Thursday':  [u'Fundamentals Of Ai: 10:30-12NOON'],
-    }
+    # get profile
+    url_profile = 'http://api.foodessentials.com/getprofile'
+    params={'sid': sid,'f':'json','api_key': FE_APIKey}
+    sid
 
-    Some notes:
-    1. Remember that dictionaries are unordered data structures, so the order
-    of keys does not matter.
-    2. The class lists should be in alphabetical order of class name.
-    3. If there is no class on a day, don't include a key for that day.
-    '''
+    #resp = requests.post(url, data=data, headers=headers)
+
+
+
+
+
+
+
     schedule_courses = json.loads(request.form.get('foods'))
     food_items = json.loads(request.form.get(''))
 
