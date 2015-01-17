@@ -46,4 +46,8 @@ if __name__ == '__main__':
         main()
     elif flag == 'app':
     '''
+<<<<<<< HEAD
     app.run(debug=True)
+=======
+    app.run(debug=True)
+>>>>>>> abb3529a3eeb606dd149fe8a4cc711180df04afb
