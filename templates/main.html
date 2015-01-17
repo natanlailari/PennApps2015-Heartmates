@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+
+{% block content %}
+
+<div ng-app="HeartmatesApp">
+  <div class = "nav">
+  	<div style="float: left; margin-left: 40px; margin-top: 18px;"><a href="/"><img src="/static/img/menu-heartmates.jpg" height="43px"></a></div>
+  	<div style="float: right; margin-right: 40px; margin-top: 30px;"><a href="#"><img src="/static/img/menu-username.jpg" height="12px"></a><font color="#bbb">&nbsp;&nbsp;|&nbsp;&nbsp;</font><a href="/cart"><img src="/static/img/menu-viewcart.jpg" height="12px"></a></div>
+  </div>
+
+  <div ng-view></div>
+</div>
+
+<script src="/static/heartmates.js">
+</script>
+
+{% endblock content %}
