@@ -4,7 +4,9 @@ from flask import Flask, jsonify, render_template, request
 import csv
 import json
 import requests
+from requests.auth import HTTPBasicAuth
 import urllib
+
 
 app = Flask(__name__)
 
@@ -62,14 +64,19 @@ def nutrition_facts():
     return str(resp.json()['product']['productscore'])
     #resp = requests.post(url, data=data, headers=headers)
 # @app.route('/postmates_delivery', methods=['POST'])
-@app.route('/postmates_delivery/')
-def postmates_delivery():
-    PM_Test_APIKey = 'ddc432d3-6900-44b0-84bf-58f3c16ef803'
+@app.route('/postmates_delivery/<dropoff_address>')
+def postmates_delivery(dropoff_address):
+    PM_Test_APIKey = 'd184ecab-5f46-42fd-bbfc-28b73b88cf4e'
     PM_cust_id = 'cus_KAay_YCGWhyi_k'
     url = 'https://api.postmates.com'
     url_delivery = url + '/v1/customers/' + PM_cust_id + '/delivery_quotes'
 
-
+    headers = {'user': 'd184ecab-5f46-42fd-bbfc-28b73b88cf4e'}
+    data = {'pickup_address': '3942 Spruce Street, Philadelphia, PA 19104',
+    'dropoff_address':'1701 John F Kennedy Boulevard, Philadelphia, PA 19103'}
+    resp = requests.post(url_delivery, data=data, auth=HTTPBasicAuth('d184ecab-5f46-42fd-bbfc-28b73b88cf4e', ''))
+    print resp.text
+    return resp.text
 
 
 
