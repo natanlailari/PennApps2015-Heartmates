@@ -1,7 +1,8 @@
+	
 <div class="items">
 	<div ng-repeat="fooditem in state.itemList" class="item">
 
-		<a href="#"><img src="/static/img/bacon.jpg" width="400px" height="400px" style="border-bottom: solid 1px #bbb"></a>
+		<a><img ng-src={{fooditem.img}} width="400px" height="400px" style="border-bottom: solid 1px #bbb"></a>
 		<div style="border-bottom: solid 1px #bbb">
 			{{fooditem.name}}
 		</div>
@@ -17,7 +18,4 @@
 		</div>
 	</div>
 </div>
-
-
-
 

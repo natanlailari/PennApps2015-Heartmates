@@ -1,0 +1,14 @@
+<div class="cart">
+
+	<h2>Cart</h2>
+	<div style="border-bottom: solid 1px #bbb">
+		<div ng-repeat="fooditem in state.tmpArray" ng-if="fooditem.count != 0">{{fooditem.name}}
+		<button style="float:right">+</button><div style="float:right">{{fooditem.count}}</div><button style="float:right">-</button></div>
+	</div><br>
+	<form>
+		Please type your address: <input ng-model="state.address" type="text"><br>
+		<a href="/#/checkout"><button style="float:right" ng-click="submitAddr()">Checkout</button></a>
+	</form>
+	
+</div>
+
