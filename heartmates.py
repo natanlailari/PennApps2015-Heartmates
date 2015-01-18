@@ -5,11 +5,10 @@ import csv
 import json
 import requests
 from requests.auth import HTTPBasicAuth
-import urllib
-
+from threading import Thread
 
 app = Flask(__name__)
-
+resps = []
 
 @app.route('/')
 def home():
@@ -53,37 +52,68 @@ def nutrition_facts():
     #print resp.text
 
     # get profile
+    '''
     url_profile = 'http://api.foodessentials.com/getprofile'
     params={'sid': sid,'f':'json','api_key': FE_APIKey}
     resp = requests.get(url_profile, params=params)
-
+    '''
 
     # get product info
     url_product = 'http://api.foodessentials.com/productscore'
     # put UPCs here
     UPC = '042272005475' 
-    params = {'u': UPC, 'sid':sid, 'f':'json','api_key': FE_APIKey}
 
-    resp = requests.get(url_product, params=params)
+    UPC_list = {'Bacon' : '044700020067', 
+                'Broccoli': '032601025090',
+                'Tofu' : '076371011075',
+                'King Arthur Flour' : '071012050505',
+                'Prairie Farms Milk' : '093966004656',
+                'Quaker Steel Cut Oats' : '030000012031',
+                'Sliced Peaches' :'024000167136',
+                'Extra Virgin Oil' : '634039000016',
+                'Kendall Brooke Salmon' : '15078'}
+    threads = []
+    for item in items:
+        params = {'u': UPC_list[item], 'sid':sid, 'f':'json','api_key':FE_APIKey}
+        threads.append(Thread(target=get_request, args=(params, item)))
+    for thread in threads:
+        thread.start()
+    for thread in threads:
+        thread.join()
+    print [str(resp.json()['product']['productscore']) for resp in resps]
+    return jsonify([str(resp.json()['product']['productscore']) for resp in resps])
     #for x in resp.json()['product']:
     #    print x
     # return resp.text
+
+    #{'scorelist':}
+    #return jsonify({:} for item)
     return str(resp.json()['product']['productscore'])
     #resp = requests.post(url, data=data, headers=headers)
 # @app.route('/postmates_delivery', methods=['POST'])
-@app.route('/postmates_delivery/<dropoff_address>/<pickup_address>/')
-def postmates_delivery(dropoff_address, pickup_address):
+
+def get_request(params, item):
+    url_product = 'http://api.foodessentials.com/productscore'
+    resps[item] = requests.get(url_product, params=params)
+
+
+@app.route('/postmates_delivery/<dropoff_address>/')
+def postmates_delivery(dropoff_address):
     PM_Test_APIKey = 'd184ecab-5f46-42fd-bbfc-28b73b88cf4e'
     PM_cust_id = 'cus_KAay_YCGWhyi_k'
     url = 'https://api.postmates.com'
     url_delivery = url + '/v1/customers/' + PM_cust_id + '/delivery_quotes'
 
+    #pickup_address = whole foods
+
     headers = {'user': 'd184ecab-5f46-42fd-bbfc-28b73b88cf4e'}
-    data = {'pickup_address': '3942 Spruce Street, Philadelphia, PA 19104',
-    'dropoff_address':'1701 John F Kennedy Boulevard, Philadelphia, PA 19103'}
+    data = {'pickup_address': '2001 Pennsylvania Avenue Philadelphia, PA 19130',
+    'dropoff_address': dropoff_address}
     resp = requests.post(url_delivery, data=data, auth=HTTPBasicAuth('d184ecab-5f46-42fd-bbfc-28b73b88cf4e', ''))
-    print resp.text
-    return resp.text
+    #fee, created, eta
+    rj = resp.json()
+    print str({'fee': rj['fee'], 'created':rj['created'], 'eta': rj['dropoff_eta']})
+    return str({'fee': rj['fee'], 'created':rj['created'], 'eta': rj['dropoff_eta']})
 
 
 
