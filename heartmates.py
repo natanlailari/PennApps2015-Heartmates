@@ -18,7 +18,7 @@ def home():
 # @app.route('/nutrition_facts', methods=['POST'])
 @app.route('/nutrition_facts/', methods=['POST'])
 def nutrition_facts():
-    resps = []
+    resps = [1,1,1,1,1,1,1,1,1,1]
     print str(request.data)
     print 'nutrition world1'
     args = json.loads(request.data)['items']
@@ -84,6 +84,8 @@ def nutrition_facts():
         thread.start()
     for thread in threads:
         thread.join()
+    resps = [resp for resp in resps if resp != 1]
+
     print [str(resp.json()['product']['productscore']) for resp in resps]
     print [str(resp.json()['product']['productscore']) for resp in resps]
     print [str(resp.json()['product']['productscore']) for resp in resps]
@@ -103,7 +105,7 @@ def nutrition_facts():
 
 def get_request(params, num, resps):
     url_product = 'http://api.foodessentials.com/productscore'
-    resps.append(requests.get(url_product, params=params))
+    resps[num] = requests.get(url_product, params=params)
 
 
 @app.route('/postmates_delivery/<dropoff_address>/')
@@ -130,7 +132,10 @@ def postmates_delivery(dropoff_address):
     # str(int(c_vals[0]) - 3) + c_vals[1] + c_vals[2]
     eta_vals = (rj['dropoff_eta'].lstrip('0123456789-').lstrip('T').rstrip('Z')).split(':')
     # str(int(eta_vals[0]) - 3) + eta_vals[1] + eta_vals[2]
-    return str(json.dumps({'fee': '$'+str(int(rj['fee'])/100.0)+'0', 'created':str(int(c_vals[0]) - 5) +':'+ c_vals[1] +':'+ c_vals[2], 'eta': str(int(eta_vals[0]) - 5) +':'+ eta_vals[1] +':'+ eta_vals[2]}))
+    fee = '$'+str(int(rj['fee'])/100.0)+'0'
+    if len(fee) == 7:
+        fee = fee[:6]
+    return str(json.dumps({'fee': fee, 'created':str(int(c_vals[0]) - 5) +':'+ c_vals[1] +':'+ c_vals[2], 'eta': str(int(eta_vals[0]) - 5) +':'+ eta_vals[1] +':'+ eta_vals[2]}))
 
     return str(json.dumps({'fee': '$'+str(int(rj['fee'])/100.0)+'0', 'created':rj['created'].lstrip('0123456789-').lstrip('T').rstrip('Z'), 'eta': rj['dropoff_eta'].lstrip('0123456789-').lstrip('T').rstrip('Z')}))
 
