@@ -17,8 +17,15 @@ def home():
     return render_template('main.html'); 
 
 # @app.route('/nutrition_facts', methods=['POST'])
-@app.route('/nutrition_facts/')
+@app.route('/nutrition_facts/', methods=['POST'])
 def nutrition_facts():
+
+    args = json.loads(request.data())
+    items = args['items']
+    print 'items'
+    print items
+    # {items :[item1, item2, item3]}
+
     FE_APIKey = 'n54k3jg9cpkwzvaam4vavc7c'
 
 
@@ -41,9 +48,9 @@ def nutrition_facts():
     # params = {'json': prof_json} gives developer inactive error
     url_setprof = 'http://api.foodessentials.com/setprofile'
     resp = requests.post(url_setprof, params=params)
-    print params
-    print resp
-    print resp.text
+    #print params
+    #print resp
+    #print resp.text
 
     # get profile
     url_profile = 'http://api.foodessentials.com/getprofile'
@@ -58,14 +65,14 @@ def nutrition_facts():
     params = {'u': UPC, 'sid':sid, 'f':'json','api_key': FE_APIKey}
 
     resp = requests.get(url_product, params=params)
-    for x in resp.json()['product']:
-        print x
+    #for x in resp.json()['product']:
+    #    print x
     # return resp.text
     return str(resp.json()['product']['productscore'])
     #resp = requests.post(url, data=data, headers=headers)
 # @app.route('/postmates_delivery', methods=['POST'])
-@app.route('/postmates_delivery/<dropoff_address>')
-def postmates_delivery(dropoff_address):
+@app.route('/postmates_delivery/<dropoff_address>/<pickup_address>/')
+def postmates_delivery(dropoff_address, pickup_address):
     PM_Test_APIKey = 'd184ecab-5f46-42fd-bbfc-28b73b88cf4e'
     PM_cust_id = 'cus_KAay_YCGWhyi_k'
     url = 'https://api.postmates.com'
