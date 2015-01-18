@@ -2,7 +2,7 @@
 
 	<h2>Cart</h2>
 	<div>
-		<div ng-repeat="fooditem in state.tmpArray" ng-if="fooditem.score < 0" class="itemWrap">
+		<div ng-repeat="fooditem in state.tmpArray" ng-if="fooditem.count != 0" class="itemWrap">
 			<div class="nameWrapper">{{fooditem.name}}</div>
 			<div class="adviceWrapper">{{fooditem.score}}
 			</div>
