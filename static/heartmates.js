@@ -117,17 +117,21 @@ angular
             }
 
             $scope.firstCheckOut = function() {
+                console.log("test");
                 for (i = 0; i < $scope.state.itemList.length; i++) {
                     if ($scope.state.itemList[i].count != 0) {
-                        $scope.state.itemsArray.push(itemList[i].name);
-                        console.log("hello" + i);
+                        $scope.state.itemsArray.push($scope.state.itemList[i].name);
+                        console.log('test');
                     }
                 }
+                console.log($scope.state.itemsArray);
+
                 $http
-                    .post('/nutrition_facts', {
+                    .post('/nutrition_facts/', {
                         items: $scope.state.itemsArray
                     })
                     .success(function(data, status, headers, config) {
+                        console.log(data);
                         for (i = 0; i < data.scoreList; i++) {
                              $scope.state.itemList[data.scoreList[i].name] = data.scoreList[i].score;
                              item = {
@@ -143,7 +147,7 @@ angular
 
             $scope.finalCheckOut = function() {
                 $http
-                    .get('postmates_delivery/' + $scope.state.address)
+                    .get('/postmates_delivery/' + $scope.state.address)
                     .success(function(data, status, headers, config) {
                         $scope.state.fee = data.fee;
                         $scope.state.created = data.created;

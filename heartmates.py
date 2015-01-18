@@ -18,9 +18,12 @@ def home():
 # @app.route('/nutrition_facts', methods=['POST'])
 @app.route('/nutrition_facts/', methods=['POST'])
 def nutrition_facts():
+    print json.loads(request.data)['items']
 
-    args = json.loads(request.data())
-    items = args['items']
+    #return json.loads(request.data)
+    args = json.loads(request.data)['items']
+
+    items = args
     print 'items'
     print items
     # {items :[item1, item2, item3]}
