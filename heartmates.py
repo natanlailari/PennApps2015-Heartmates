@@ -12,7 +12,6 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     '''This is what you will see if you go to http://127.0.0.1:5000'''
-    return 'hello world'
     return render_template('main.html'); 
 
 # @app.route('/nutrition_facts', methods=['POST'])
