@@ -67,10 +67,8 @@ def nutrition_facts():
     # put UPCs here
     #UPC = '042272005475' 
 
-<<<<<<< HEAD
-=======
+
     #Practice UPC values
->>>>>>> bff9deff71db426137fb91213bef2b807e9ec37d
     UPC_list = {'Bacon' : '093966004656', 
                 'Broccoli': '032601025090',
                 'Extra Firm Tofu' : '076371011075',
