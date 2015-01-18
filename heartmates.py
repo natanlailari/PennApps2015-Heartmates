@@ -65,6 +65,9 @@ def nutrition_facts():
 @app.route('/postmates_delivery/')
 def postmates_delivery():
     PM_Test_APIKey = 'ddc432d3-6900-44b0-84bf-58f3c16ef803'
+    PM_cust_id = 'cus_KAay_YCGWhyi_k'
+    url = 'https://api.postmates.com'
+    url_delivery = url + '/v1/customers/' + PM_cust_id + '/delivery_quotes'
 
 
 
