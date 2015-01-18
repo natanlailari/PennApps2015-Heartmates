@@ -2,16 +2,48 @@
 
 
 {% block content %}
+	
 
-<div ng-app="HeartmatesApp">
-  <div class = "nav">
-  	<div style="float: left; margin-left: 40px; margin-top: 18px;"><a href="/"><img src="/static/img/menu-heartmates.jpg" height="43px"></a></div>
-  	<div style="float: right; margin-right: 40px; margin-top: 30px;"><a href="#"><img src="/static/img/menu-username.jpg" height="12px"></a><font color="#bbb">&nbsp;&nbsp;|&nbsp;&nbsp;</font><a href="/#/cart"><img src="/static/img/menu-viewcart.jpg" height="12px"></a></div>
-  </div>
+<div ng-app="HeartmatesApp"> 
+<div ng-controller="ItemlistController">
 
-  <div ng-view></div>
+	<div class = "nav">
+	  	<div style="float: left; margin-left: 40px; margin-top: 18px;"><a href="/"><img src="/static/img/menu-heartmates.jpg" height="43px"></a></div>
+	  	<div style="float: right; margin-right: 40px; margin-top: 30px;"><a href="#"><img src="/static/img/menu-username.jpg" height="12px"></a><font color="#bbb">&nbsp;&nbsp;|&nbsp;&nbsp;</font><a href="#openCart" ng-click="firstCheckOut()"><img src="/static/img/menu-viewcart.jpg" height="12px"></a></div>
+	</div>
+
+	<div id="openCart" class="modalDialog">
+		<div>
+			<a href="#close" title="Close" class="close">X</a>
+			<h2>Cart</h2>
+			<div ng-repeat="fooditem in state.finalList" style="border-bottom: solid 1px #bbb">
+				<div>
+				<button style="float:right">+</button><div style="float:right"></div><button style="float:right">-</button></div>
+			</div><br>
+			<form>
+				Please type your address: <input type="text"><br>
+			</form>
+			<a href="#openCheckout"><button style="float:right">Checkout</button></a>
+
+		</div>
+	</div>
+
+	<div id="openCheckout" class="modalDialog">
+		<div>
+			<a href="#close" title="Close" class="close">X</a>
+			<h2>Checkout</h2>
+
+			<a href="#close"><button style="float:right">Complete</button></a>
+
+		</div>
+	</div>
+
+
+
+
+	  <div ng-view></div>
+	</div>
 </div>
-
 <script src="/static/heartmates.js">
 </script>
 

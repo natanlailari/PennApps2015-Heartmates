@@ -1,38 +1,23 @@
-
 <div class="items">
+	<div ng-repeat="fooditem in state.itemList" class="item">
 
-	<div class="col-md-4">
-		<a href="#"><img src="/static/img/bacon.jpg"></a>
-	</div>
-	<div class="col-md-4">
-		<a href="#"><img src="/static/img/broccoli.jpg"></a>
-	</div>
-	<div class="col-md-4">
-		<a href="#"><img src="/static/img/cannedpeach.jpg"></a>
+		<a href="#"><img src="/static/img/bacon.jpg" width="400px" height="400px" style="border-bottom: solid 1px #bbb"></a>
+		<div style="border-bottom: solid 1px #bbb">
+			{{fooditem.name}}
+		</div>
+		
+		<div>
+			<button style="float:left" ng-click="decrement(fooditem)">-</button>
+			
+			<div style="float:left">{{fooditem.tempCount}}</div>
+			
+			<button style="float:left" ng-click="increment(fooditem)">+</button>
+
+			<div style="float:right" ><a ng-click="addToCart(fooditem)">Add to Cart</a></div>
+		</div>
 	</div>
 </div>
 
 
-<div class="row2">
-	<div class="col-md-4">
-		<a href="#"><img src="/static/img/flour.jpg"></a>
-	</div>
-	<div class="col-md-4">
-		<a href="#"><img src="/static/img/oatmeal.jpg"></a>
-	</div>
-	<div class="col-md-4">
-		<a href="#"><img src="/static/img/oliveoil.jpg"></a>
-	</div>
-</div>
 
-<div class="row3">
-	<div class="col-md-4">
-		<a href="#"><img src="/static/img/salmon.jpg"></a>
-	</div>
-	<div class="col-md-4">
-		<a href="#"><img src="/static/img/tofu.jpg"></a>
-	</div>
-	<div class="col-md-4">
-		<a href="#"><img src="/static/img/milk.jpg"></a>
-	</div>
-</div>	
+
