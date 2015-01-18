@@ -1,20 +1,20 @@
-	
 <div class="items">
 	<div ng-repeat="fooditem in state.itemList" class="item">
 
-		<a><img ng-src={{fooditem.img}} width="400px" height="400px" style="border-bottom: solid 1px #bbb"></a>
-		<div style="border-bottom: solid 1px #bbb">
-			{{fooditem.name}}
+		<a><img ng-src={{fooditem.img}} width="328px" height="370px" style="border-bottom: solid 1px #bbb"></a>
+		<div class="foodname">
+			&nbsp;&nbsp;{{fooditem.name}}
 		</div>
 		
-		<div>
-			<button style="float:left" ng-click="decrement(fooditem)">-</button>
+		<div class="bottomPart">
+			<div class="buttonWrapper">
+			<button class="btns" style="float:left" ng-click="decrement(fooditem)">-</button>
 			
-			<div style="float:left">{{fooditem.tempCount}}</div>
+			<div class="count" style="float:left">{{fooditem.tempCount}}</div>
 			
-			<button style="float:left" ng-click="increment(fooditem)">+</button>
-
-			<div style="float:right" ><a ng-click="addToCart(fooditem)">Add to Cart</a></div>
+			<button class="btns" style="float:left" ng-click="increment(fooditem)">+</button>
+			</div>
+			<div class="addToCartBtn" style="float:right" ><a style="color:white" ng-click="addToCart(fooditem)">Add to Cart</a></div>
 		</div>
 	</div>
 </div>

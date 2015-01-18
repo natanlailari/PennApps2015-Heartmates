@@ -39,19 +39,32 @@
 .items {
     position: relative;
     border-top: solid 1px #bbb;
-    margin-top: 60px;
+    margin-top: 90px;
     margin-left: 0px;
+}
+
+.foodname {
+    height: 20px;
+    margin-top: 2px;
+    font-size: 15px;
+    width: 180px;
+    vertical-align: top;
 }
 
 .item {
     position: relative;
     float: left;
+    margin-left: 15px;
+    margin-right: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     border-bottom: solid 1px #bbb;
     border-top: solid 1px #bbb;
     border-right: solid 1px #bbb;
     border-left: solid 1px #bbb;
-    height: 450px;
-    width: 400px;
+    height: 430px;
+    width: 330px;
+    border-radius: 3px;
 }
 
 .cart {
@@ -61,9 +74,135 @@
     margin-left: 0px;
 }
 
+.addToCartBtn {
+    margin-top: -21px;
+    margin-right: 12px;
+    border: solid 1px #2ABB9B;
+    width: 100px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    background-color: #2ABB9B; 
+}
+
+.btns{
+    border-radius: 5px;
+    border: solid 1px #2ABB9B;
+    height: 5px;
+    float: right;
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
+    margin-top: 7px;
+    martin-left: 5px;
+    background-color: #2ABB9B; 
+    line-height: 100%;
+    font-weight: 700;
+    color:white;
+
+}
+
+
+.btnstwo{
+    border-radius: 5px;
+    border: solid 1px #2ABB9B;
+    height: 5px;
+    float: right;
+    width: 25px;
+    height: 25px;
+    font-size: 18px;
+    margin-top: 10px;
+    martin-left: 5px;
+    background-color: #2ABB9B; 
+    line-height: 100%;
+    font-weight: 700;
+    color:white;
+
+}
+
+
+.bottomPart {
+    width: 100%;
+    overflow:hidden;
+}
+
+.buttonWrapper{
+    overflow: hidden;
+    width: 80px;
+    margin-left: 6px;
+    margin-right: 0;
+}
+
+.adviceWrapper{
+    overflow: hidden;
+    width: 80px;
+    margin-top: 15px;
+    margin-left: 6px;
+    margin-right: 0;
+}
+
+.itemWrap {
+    overflow: hidden;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    height: 50px;
+    font-size: 20px;
+    line-height: 100%;
+    vertical-align: middle;
+}
+
+.buttonWrappertwo{
+    overflow: hidden;
+    width: 120px;
+    margin-left: 6px;
+    margin-right:30px;
+    margin-top: -32px;
+    float: right;
+}
+
+.nameWrapper{
+    float:left;
+    width: 400px;
+    margin-top: 13px;
+    margin-left: 13px;
+}
 .checkout {
     position: relative;
     border-top: solid 1px #bbb;
     margin-top: 80px;
     margin-left: 0px;
 }
+
+.count {
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 15px;
+}
+
+.counttwo {
+    margin-top: 11px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 18px;
+}
+a {
+    cursor: hand;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+

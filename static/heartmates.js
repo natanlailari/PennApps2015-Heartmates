@@ -118,6 +118,20 @@ angular
                 return;
             };
 
+            $scope.incrementFinal = function(fooditem) {
+                fooditem.count++;
+                return;
+            };
+
+            $scope.decrementFinal = function(fooditem) {
+                fooditem.count--;
+                if (fooditem.count < 0) {
+                    fooditem.count = 0;
+                }
+                return;
+            };
+
+
 
 
             $scope.addToCart = function(fooditem) {
@@ -135,7 +149,8 @@ angular
                         $scope.state.itemsArray.push($scope.state.itemList[i].name);
                         var tmp = {
                             name: $scope.state.itemList[i].name,
-                            count: $scope.state.itemList[i].count
+                            count: $scope.state.itemList[i].count,
+                            score: 0
                         }
                         $scope.state.tmpArray.push(tmp);
                         console.log('pushed ' + $scope.state.itemList[i].name);
@@ -147,6 +162,8 @@ angular
 
                 }
 
+
+
                 $http
                     .post('/nutrition_facts/', {
                         items: $scope.state.itemsArray
@@ -154,6 +171,12 @@ angular
                     .success(function(data, status, headers, config) {
                         for (var key in data) {
                             console.log("we have" + key + ": " + data[key]); 
+                            console.log($scope.state.itemList);
+                            for (i = 0; i < $scope.state.tmpArray.length; i++) {
+                                if ($scope.state.tmpArray[i].name == key) {
+                                    $scope.state.tmpArray[i].score = data[key];
+                                }
+                            }
                         }
 
 
@@ -169,6 +192,63 @@ angular
                     })
                     .error(function(data, status, headers, config) {
                 });
+
+            $scope.state.itemList = [
+                {   name: "Bacon",
+                    count: 0,
+                    tempCount: 0,
+                    score: 0,
+                    img: "/static/img/bacon.jpg"
+                },
+                {   name: "Broccoli",
+                    count: 0,
+                    tempCount: 0,
+                    score: 0,
+                    img: "/static/img/broccoli.jpg"
+                },
+                {   name: "Sliced Peaches",
+                    count: 0,
+                    tempCount: 0,
+                    score: 0,
+                    img: "/static/img/cannedpeach.jpg"
+                },
+                {   name: "King Arthur Flour",
+                    count: 0,
+                    tempCount: 0,
+                    score: 0,
+                    img: "/static/img/flour.jpg"
+                },
+                {   name: "Quaker Steel Cut Oats",
+                    count: 0,
+                    tempCount: 0,
+                    score: 0,
+                    img: "/static/img/oatmeal.jpg"
+                },
+                {   name: "Extra Virgin Oil",
+                    count: 0,
+                    tempCount: 0,
+                    score: 0,
+                    img: "/static/img/oliveoil.jpg"
+                },
+                {   name: "Kendall Brooke Salmon",
+                    count: 0,
+                    tempCount: 0,
+                    score: 0,
+                    img: "/static/img/salmon.jpg"
+                },
+                {   name: "Extra Firm Tofu",
+                    count: 0,
+                    tempCount: 0,
+                    score: 0,
+                    img: "/static/img/tofu.jpg"
+                },
+                {   name: "Prairie Farms Milk",
+                    count: 0,
+                    tempCount: 0,
+                    score: 0,
+                    img: "/static/img/milk.jpg"
+                }];
+
             };
 
             $scope.submitAddr = function() {
