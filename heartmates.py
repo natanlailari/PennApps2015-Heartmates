@@ -65,14 +65,15 @@ def nutrition_facts():
     # get product info
     url_product = 'http://api.foodessentials.com/productscore'
     # put UPCs here
-    UPC = '042272005475' 
+    #UPC = '042272005475' 
 
-    UPC_list = {'Bacon' : '044700020067', 
+    #Practice UPC values
+    UPC_list = {'Bacon' : '093966004656', 
                 'Broccoli': '032601025090',
                 'Extra Firm Tofu' : '076371011075',
-                'King Arthur Flour' : '071012050505',
-                'Prairie Farms Milk' : '093966004656',
-                'Quaker Steel Cut Oats' : '030000012031',
+                'King Arthur Flour' : '030000012031',
+                'Prairie Farms Milk' : '041234639642',
+                'Quaker Steel Cut Oats' : '021908453361',
                 'Sliced Peaches' :'024000167136',
                 'Extra Virgin Oil' : '634039000016',
                 'Kendall Brooke Salmon' : '15078'}
